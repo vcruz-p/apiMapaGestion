@@ -5,7 +5,4 @@ namespace Application.Features.Polygons.Queries;
 
 public record GetPolygonsQuery : IRequest<Result<IEnumerable<PolygonDto>>>;
 
-public record GetPolygonByIdQuery : IRequest<Result<PolygonDto>>
-{
-    public Guid Id { get; init; }
-}
+public record GetPolygonByIdQuery(Guid Id) : IRequest<Result<PolygonDto>>;

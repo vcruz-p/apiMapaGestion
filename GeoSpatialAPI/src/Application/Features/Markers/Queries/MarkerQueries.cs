@@ -6,14 +6,6 @@ namespace Application.Features.Markers.Queries;
 // IMPORTANTE: Implementar IRequest<Result<IEnumerable<MarkerDto>>>
 public record GetMarkersQuery : IRequest<Result<IEnumerable<MarkerDto>>>;
 
-public record GetMarkerByIdQuery : IRequest<Result<MarkerDto>>
-{
-    public Guid Id { get; init; }
-}
+public record GetMarkerByIdQuery(Guid Id) : IRequest<Result<MarkerDto>>;
 
-public record GetNearbyMarkersQuery : IRequest<Result<IEnumerable<MarkerDto>>>
-{
-    public double Latitude { get; init; }
-    public double Longitude { get; init; }
-    public double RadiusInMeters { get; init; } = 10000.0;
-}
+public record GetNearbyMarkersQuery(double Latitude, double Longitude, double RadiusInMeters = 10000.0) : IRequest<Result<IEnumerable<MarkerDto>>>;

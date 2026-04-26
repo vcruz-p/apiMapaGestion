@@ -6,24 +6,8 @@ using NetTopologySuite.Geometries;
 namespace Application.Features.Markers.Commands;
 
 // IMPORTANTE: Implementar IRequest<Result<MarkerDto>>
-public record CreateMarkerCommand : IRequest<Result<MarkerDto>>
-{
-    public string Name { get; init; } = string.Empty;
-    public string? Description { get; init; }
-    public double Latitude { get; init; }
-    public double Longitude { get; init; }
-}
+public record CreateMarkerCommand(string Name, string? Description, double Latitude, double Longitude) : IRequest<Result<MarkerDto>>;
 
-public record UpdateMarkerCommand : IRequest<Result<MarkerDto>>
-{
-    public Guid Id { get; init; }
-    public string? Name { get; init; }
-    public string? Description { get; init; }
-    public double Latitude { get; init; }
-    public double Longitude { get; init; }
-}
+public record UpdateMarkerCommand(Guid Id, string? Name, string? Description, double Latitude, double Longitude) : IRequest<Result<MarkerDto>>;
 
-public record DeleteMarkerCommand : IRequest<Result<bool>>
-{
-    public Guid Id { get; init; }
-}
+public record DeleteMarkerCommand(Guid Id) : IRequest<Result<bool>>;
