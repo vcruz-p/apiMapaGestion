@@ -42,7 +42,7 @@ public class CreatePolygonHandler : IRequestHandler<CreatePolygonCommand, Result
             var linearRing = new LinearRing(coordinates[0]);
             var polygonGeometry = new NetTopologySuite.Geometries.Polygon(linearRing);
 
-            var polygon = new Polygon
+            var polygon = new Domain.Entities.Polygon
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
@@ -107,7 +107,7 @@ public class GetPolygonsHandler : IRequestHandler<GetPolygonsQuery, Result<IEnum
         var polygons = await _unitOfWork.Polygons.GetAllAsync(cancellationToken);
         var dtos = polygons.Select(p => new PolygonDto(
             p.Id, p.Name, p.Description,
-            p.Geometry?.Coordinates?.Select(ring => ring.Select(c => new List<double> { c.X, c.Y }).ToList()).ToList() ?? new List<List<double>>(),
+            p.Geometry?.Coordinates?.Select(ring => ring.Coordinates.Select(c => new List<double> { c.X, c.Y }).ToList()).ToList() ?? new List<List<double>>(),
             p.CreatedAt, p.UpdatedAt,
             p.CreatedBy, p.UpdatedBy, p.OrganizationId));
 
@@ -146,7 +146,7 @@ public class GetPolygonByIdHandler : IRequestHandler<GetPolygonByIdQuery, Result
 
         var dto = new PolygonDto(
             polygon.Id, polygon.Name, polygon.Description,
-            polygon.Geometry?.Coordinates?.Select(ring => ring.Select(c => new List<double> { c.X, c.Y }).ToList()).ToList() ?? new List<List<double>>(),
+            polygon.Geometry?.Coordinates?.Select(ring => ring.Coordinates.Select(c => new List<double> { c.X, c.Y }).ToList()).ToList() ?? new List<List<double>>(),
             polygon.CreatedAt, polygon.UpdatedAt,
             polygon.CreatedBy, polygon.UpdatedBy, polygon.OrganizationId);
 

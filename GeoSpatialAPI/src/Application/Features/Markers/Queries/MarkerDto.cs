@@ -8,7 +8,7 @@ public record MarkerDto(
     double Longitude,
     DateTime CreatedAt,
     DateTime UpdatedAt,
-    string CreatedBy,
-    string UpdatedBy,
-    Guid OrganizationId
+    int CreatedBy,
+    int UpdatedBy,
+    int OrganizationId
 );
