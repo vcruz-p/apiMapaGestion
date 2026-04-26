@@ -1,7 +1,4 @@
 using Infrastructure.Data;
-using Infrastructure.Repositories;
-using Application.Services;
-using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
 using StackExchange.Redis;
