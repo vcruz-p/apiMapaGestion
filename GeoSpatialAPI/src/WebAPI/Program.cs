@@ -1,7 +1,7 @@
-using GeoApi.Infrastructure.Data;
-using GeoApi.Infrastructure.Repositories;
-using GeoApi.Application.Services;
-using GeoApi.Application.Interfaces;
+using Infrastructure.Data;
+using Infrastructure.Repositories;
+using Application.Services;
+using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
 using StackExchange.Redis;
