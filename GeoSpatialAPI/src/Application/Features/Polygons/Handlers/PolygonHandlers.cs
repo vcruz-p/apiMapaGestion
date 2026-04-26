@@ -105,11 +105,30 @@ public class GetPolygonsHandler : IRequestHandler<GetPolygonsQuery, Result<IEnum
             return Result<IEnumerable<PolygonDto>>.Ok(cached);
 
         var polygons = await _unitOfWork.Polygons.GetAllAsync(cancellationToken);
-        var dtos = polygons.Select(p => new PolygonDto(
-            p.Id, p.Name, p.Description,
-            p.Geometry?.Coordinates?.Select(ring => ring.Select(c => new List<double> { c.X, c.Y }).ToList()).ToList() ?? new List<List<double>>(),
-            p.CreatedAt, p.UpdatedAt,
-            p.CreatedBy, p.UpdatedBy, p.OrganizationId));
+        var dtos = polygons.Select(p => 
+        {
+            var coordinatesList = new List<List<List<double>>>();
+            if (p.Geometry != null)
+            {
+                // Exterior ring
+                var exteriorRing = p.Geometry.Shell;
+                var exteriorCoords = exteriorRing.Coordinates.Select(c => new List<double> { c.X, c.Y }).ToList();
+                coordinatesList.Add(exteriorCoords);
+                
+                // Interior rings (holes)
+                foreach (var interiorRing in p.Geometry.Holes)
+                {
+                    var interiorCoords = interiorRing.Coordinates.Select(c => new List<double> { c.X, c.Y }).ToList();
+                    coordinatesList.Add(interiorCoords);
+                }
+            }
+            
+            return new PolygonDto(
+                p.Id, p.Name, p.Description,
+                coordinatesList,
+                p.CreatedAt, p.UpdatedAt,
+                p.CreatedBy, p.UpdatedBy, p.OrganizationId);
+        });
 
         await _cache.SetAsync(cacheKey, dtos, TimeSpan.FromMinutes(5), cancellationToken);
         return Result<IEnumerable<PolygonDto>>.Ok(dtos);
@@ -144,9 +163,25 @@ public class GetPolygonByIdHandler : IRequestHandler<GetPolygonByIdQuery, Result
         if (polygon == null)
             return Result<PolygonDto>.Fail("Polygon not found");
 
+        var coordinatesList = new List<List<List<double>>>();
+        if (polygon.Geometry != null)
+        {
+            // Exterior ring
+            var exteriorRing = polygon.Geometry.Shell;
+            var exteriorCoords = exteriorRing.Coordinates.Select(c => new List<double> { c.X, c.Y }).ToList();
+            coordinatesList.Add(exteriorCoords);
+            
+            // Interior rings (holes)
+            foreach (var interiorRing in polygon.Geometry.Holes)
+            {
+                var interiorCoords = interiorRing.Coordinates.Select(c => new List<double> { c.X, c.Y }).ToList();
+                coordinatesList.Add(interiorCoords);
+            }
+        }
+
         var dto = new PolygonDto(
             polygon.Id, polygon.Name, polygon.Description,
-            polygon.Geometry?.Coordinates?.Select(ring => ring.Select(c => new List<double> { c.X, c.Y }).ToList()).ToList() ?? new List<List<double>>(),
+            coordinatesList,
             polygon.CreatedAt, polygon.UpdatedAt,
             polygon.CreatedBy, polygon.UpdatedBy, polygon.OrganizationId);
 
