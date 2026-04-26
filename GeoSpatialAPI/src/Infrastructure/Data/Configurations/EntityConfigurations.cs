@@ -16,8 +16,7 @@ public class MarkerConfiguration : IEntityTypeConfiguration<Marker>
         builder.Property(e => e.Name).HasColumnName("name").IsRequired().HasMaxLength(200);
         builder.Property(e => e.Description).HasColumnName("description").HasMaxLength(1000);
         builder.Property(e => e.Geometry).HasColumnName("geometry")
-            .HasColumnType("geometry(Point, 4326)")
-            .HasSpatialIndex(new SpatialIndexAttribute { IsGeography = false });
+            .HasColumnType("geometry(Point, 4326)");
         builder.Property(e => e.CreatedAt).HasColumnName("created_at");
         builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
         builder.Property(e => e.CreatedBy).HasColumnName("created_by");
@@ -47,8 +46,7 @@ public class PolygonConfiguration : IEntityTypeConfiguration<Domain.Entities.Pol
         builder.Property(e => e.Name).HasColumnName("name").IsRequired().HasMaxLength(200);
         builder.Property(e => e.Description).HasColumnName("description").HasMaxLength(1000);
         builder.Property(e => e.Geometry).HasColumnName("geometry")
-            .HasColumnType("geometry(Polygon, 4326)")
-            .HasSpatialIndex(new SpatialIndexAttribute { IsGeography = false });
+            .HasColumnType("geometry(Polygon, 4326)");
         builder.Property(e => e.CreatedAt).HasColumnName("created_at");
         builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
         builder.Property(e => e.CreatedBy).HasColumnName("created_by");
@@ -75,8 +73,7 @@ public class RouteConfiguration : IEntityTypeConfiguration<Route>
         builder.Property(e => e.Name).HasColumnName("name").IsRequired().HasMaxLength(200);
         builder.Property(e => e.Description).HasColumnName("description").HasMaxLength(1000);
         builder.Property(e => e.Geometry).HasColumnName("geometry")
-            .HasColumnType("geometry(LineString, 4326)")
-            .HasSpatialIndex(new SpatialIndexAttribute { IsGeography = false });
+            .HasColumnType("geometry(LineString, 4326)");
         builder.Property(e => e.CreatedAt).HasColumnName("created_at");
         builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
         builder.Property(e => e.CreatedBy).HasColumnName("created_by");
@@ -103,8 +100,7 @@ public class TargetConfiguration : IEntityTypeConfiguration<Target>
         builder.Property(e => e.Name).HasColumnName("name").IsRequired().HasMaxLength(200);
         builder.Property(e => e.Description).HasColumnName("description").HasMaxLength(1000);
         builder.Property(e => e.Geometry).HasColumnName("geometry")
-            .HasColumnType("geometry(Point, 4326)")
-            .HasSpatialIndex(new SpatialIndexAttribute { IsGeography = false });
+            .HasColumnType("geometry(Point, 4326)");
         builder.Property(e => e.Metadata).HasColumnName("metadata")
             .HasColumnType("jsonb");
         builder.Property(e => e.ParentId).HasColumnName("parent_id");
