@@ -1,0 +1,53 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeoSpatialAPI", "GeoSpatialAPI", "{0C81B8ED-F987-845F-DFBF-647BA32D7F63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0A439C3A-9FE9-43B5-1550-E343235AAA58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "GeoSpatialAPI\src\Application\Application.csproj", "{6F0AC538-C993-CF2D-C898-65D64AB82B51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "GeoSpatialAPI\src\Domain\Domain.csproj", "{C2D2D0D2-67C7-F17E-AF76-41D983099402}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "GeoSpatialAPI\src\Infrastructure\Infrastructure.csproj", "{F65F523B-ECDC-BB79-FBEC-F47980E0F457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "GeoSpatialAPI\src\WebAPI\WebAPI.csproj", "{49EC5CA6-3F76-53B0-1BF0-113E9A53BD06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F0AC538-C993-CF2D-C898-65D64AB82B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0AC538-C993-CF2D-C898-65D64AB82B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0AC538-C993-CF2D-C898-65D64AB82B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F0AC538-C993-CF2D-C898-65D64AB82B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2D2D0D2-67C7-F17E-AF76-41D983099402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2D2D0D2-67C7-F17E-AF76-41D983099402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2D2D0D2-67C7-F17E-AF76-41D983099402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2D2D0D2-67C7-F17E-AF76-41D983099402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F65F523B-ECDC-BB79-FBEC-F47980E0F457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F65F523B-ECDC-BB79-FBEC-F47980E0F457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F65F523B-ECDC-BB79-FBEC-F47980E0F457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F65F523B-ECDC-BB79-FBEC-F47980E0F457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49EC5CA6-3F76-53B0-1BF0-113E9A53BD06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49EC5CA6-3F76-53B0-1BF0-113E9A53BD06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49EC5CA6-3F76-53B0-1BF0-113E9A53BD06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49EC5CA6-3F76-53B0-1BF0-113E9A53BD06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A439C3A-9FE9-43B5-1550-E343235AAA58} = {0C81B8ED-F987-845F-DFBF-647BA32D7F63}
+		{6F0AC538-C993-CF2D-C898-65D64AB82B51} = {0A439C3A-9FE9-43B5-1550-E343235AAA58}
+		{C2D2D0D2-67C7-F17E-AF76-41D983099402} = {0A439C3A-9FE9-43B5-1550-E343235AAA58}
+		{F65F523B-ECDC-BB79-FBEC-F47980E0F457} = {0A439C3A-9FE9-43B5-1550-E343235AAA58}
+		{49EC5CA6-3F76-53B0-1BF0-113E9A53BD06} = {0A439C3A-9FE9-43B5-1550-E343235AAA58}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D2EDEB6-DCD0-4705-8C47-60C50494C70F}
+	EndGlobalSection
+EndGlobal

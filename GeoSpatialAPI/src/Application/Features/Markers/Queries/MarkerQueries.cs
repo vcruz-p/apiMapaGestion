@@ -1,21 +1,19 @@
+using MediatR;
+using Application.Common.Models;
+
 namespace Application.Features.Markers.Queries;
 
-public record GetMarkersQuery();
+// IMPORTANTE: Implementar IRequest<Result<IEnumerable<MarkerDto>>>
+public record GetMarkersQuery : IRequest<Result<IEnumerable<MarkerDto>>>;
 
-public record GetMarkerByIdQuery(Guid Id);
+public record GetMarkerByIdQuery : IRequest<Result<MarkerDto>>
+{
+    public Guid Id { get; init; }
+}
 
-public record GetNearbyMarkersQuery(double Latitude, double Longitude, double RadiusInMeters);
-
-public record MarkerDto(
-    Guid Id,
-    string Name,
-    string? Description,
-    double Latitude,
-    double Longitude,
-    DateTime CreatedAt,
-    DateTime UpdatedAt,
-    int CreatedBy,
-    int UpdatedBy,
-    int OrganizationId,
-    Dictionary<string, object>? Metadata = null
-);
+public record GetNearbyMarkersQuery : IRequest<Result<IEnumerable<MarkerDto>>>
+{
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
+    public double RadiusKm { get; init; } = 10.0;
+}

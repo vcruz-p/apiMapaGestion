@@ -1,20 +1,19 @@
+using MediatR;
+using Application.Common.Models;
+using NetTopologySuite.Geometries;
+
 namespace Application.Features.Markers.Commands;
 
-public record CreateMarkerCommand(
-    string Name,
-    string? Description,
-    double Latitude,
-    double Longitude,
-    Dictionary<string, object>? Metadata = null
-);
+// IMPORTANTE: Implementar IRequest<Result<MarkerDto>>
+public record CreateMarkerCommand : IRequest<Result<MarkerDto>>
+{
+    public string Name { get; init; } = string.Empty;
+    public string? Description { get; init; }
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
+}
 
-public record UpdateMarkerCommand(
-    Guid Id,
-    string Name,
-    string? Description,
-    double Latitude,
-    double Longitude,
-    Dictionary<string, object>? Metadata = null
-);
-
-public record DeleteMarkerCommand(Guid Id);
+public record UpdateMarkerCommand : IRequest<Result<MarkerDto>>
+{
+    public Guid Id { get; init; }
+    public string? Name { get; init; }
