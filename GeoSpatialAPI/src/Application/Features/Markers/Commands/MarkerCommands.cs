@@ -1,5 +1,6 @@
 using MediatR;
 using Application.Common.Models;
+using Application.Features.Markers.Queries;
 using NetTopologySuite.Geometries;
 
 namespace Application.Features.Markers.Commands;
