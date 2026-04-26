@@ -82,35 +82,35 @@ public class PolygonRepository : IPolygonRepository
         _context = context;
     }
 
-    public async Task<Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Domain.Entities.Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.Polygons.FindAsync(new object[] { id }, cancellationToken);
     }
 
-    public async Task<IEnumerable<Polygon>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Domain.Entities.Polygon>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _context.Polygons.ToListAsync(cancellationToken);
     }
 
-    public async Task<Polygon> AddAsync(Polygon entity, CancellationToken cancellationToken = default)
+    public async Task<Domain.Entities.Polygon> AddAsync(Domain.Entities.Polygon entity, CancellationToken cancellationToken = default)
     {
         await _context.Polygons.AddAsync(entity, cancellationToken);
         return entity;
     }
 
-    public Task UpdateAsync(Polygon entity, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(Domain.Entities.Polygon entity, CancellationToken cancellationToken = default)
     {
         _context.Polygons.Update(entity);
         return Task.CompletedTask;
     }
 
-    public Task DeleteAsync(Polygon entity, CancellationToken cancellationToken = default)
+    public Task DeleteAsync(Domain.Entities.Polygon entity, CancellationToken cancellationToken = default)
     {
         _context.Polygons.Remove(entity);
         return Task.CompletedTask;
     }
 
-    public async Task<IEnumerable<Polygon>> GetIntersectingAsync(Geometry geometry, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Domain.Entities.Polygon>> GetIntersectingAsync(Geometry geometry, CancellationToken cancellationToken = default)
     {
         var wkt = geometry.AsText();
         var polygons = await _context.Polygons

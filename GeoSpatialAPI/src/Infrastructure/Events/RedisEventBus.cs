@@ -1,4 +1,5 @@
 using Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 
 namespace Infrastructure.Events;
