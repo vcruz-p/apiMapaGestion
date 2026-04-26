@@ -4,12 +4,12 @@ using System.Text.Json;
 
 namespace Infrastructure.Caching;
 
-public class CacheService : ICacheService
+public class RedisCacheService : ICacheService
 {
     private readonly IDistributedCache _cache;
     private readonly TimeSpan _defaultExpiration = TimeSpan.FromMinutes(5);
 
-    public CacheService(IDistributedCache cache)
+    public RedisCacheService(IDistributedCache cache)
     {
         _cache = cache;
     }
