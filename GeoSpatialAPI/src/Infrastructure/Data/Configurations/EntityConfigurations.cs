@@ -1,7 +1,6 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NetTopologySuite.Geometries;
 
 namespace Infrastructure.Data.Configurations;
 
@@ -36,9 +35,9 @@ public class MarkerConfiguration : IEntityTypeConfiguration<Marker>
     }
 }
 
-public class PolygonConfiguration : IEntityTypeConfiguration<Polygon>
+public class PolygonConfiguration : IEntityTypeConfiguration<Domain.Entities.Polygon>
 {
-    public void Configure(EntityTypeBuilder<Polygon> builder)
+    public void Configure(EntityTypeBuilder<Domain.Entities.Polygon> builder)
     {
         builder.ToTable("polygons");
         

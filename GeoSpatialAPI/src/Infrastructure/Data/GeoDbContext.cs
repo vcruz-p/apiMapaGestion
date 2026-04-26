@@ -1,7 +1,6 @@
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using NetTopologySuite.Geometries;
 
 namespace Infrastructure.Data;
 
@@ -10,7 +9,7 @@ public class GeoDbContext : DbContext
     private readonly ICurrentContextService _contextService;
 
     public DbSet<Marker> Markers => Set<Marker>();
-    public DbSet<Polygon> Polygons => Set<Polygon>();
+    public DbSet<Domain.Entities.Polygon> Polygons => Set<Domain.Entities.Polygon>();
     public DbSet<Route> Routes => Set<Route>();
     public DbSet<Target> Targets => Set<Target>();
 
