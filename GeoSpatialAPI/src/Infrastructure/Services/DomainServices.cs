@@ -34,7 +34,7 @@ public class MarkerService : IMarkerService
             Id = Guid.NewGuid(),
             Name = name,
             Description = description,
-            Location = new Point(longitude, latitude) { SRID = 4326 }
+            Geometry = new Point(longitude, latitude) { SRID = 4326 }
         };
 
         await _markerRepository.AddAsync(marker, cancellationToken);
@@ -49,7 +49,7 @@ public class MarkerService : IMarkerService
 
         if (name != null) marker.Name = name;
         if (description != null) marker.Description = description;
-        marker.Location = new Point(longitude, latitude) { SRID = 4326 };
+        marker.Geometry = new Point(longitude, latitude) { SRID = 4326 };
 
         await _markerRepository.UpdateAsync(marker, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
@@ -239,7 +239,7 @@ public class TargetService : ITargetService
             Description = description,
             ParentId = parentId,
             ParentType = parentType,
-            Location = location
+            Geometry = location
         };
 
         await _targetRepository.AddAsync(target, cancellationToken);
@@ -256,7 +256,7 @@ public class TargetService : ITargetService
         if (description != null) target.Description = description;
         if (parentId.HasValue) target.ParentId = parentId.Value;
         if (parentType != null) target.ParentType = parentType;
-        if (location != null) target.Location = location;
+        if (location != null) target.Geometry = location;
 
         await _targetRepository.UpdateAsync(target, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
