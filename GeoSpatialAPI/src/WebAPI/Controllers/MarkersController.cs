@@ -62,8 +62,7 @@ public class MarkersController : ControllerBase
             request.Name,
             request.Description,
             request.Latitude,
-            request.Longitude,
-            request.Metadata);
+            request.Longitude);
         
         var result = await _mediator.Send(command);
         if (!result.Success)
@@ -83,8 +82,7 @@ public class MarkersController : ControllerBase
             request.Name,
             request.Description,
             request.Latitude,
-            request.Longitude,
-            request.Metadata);
+            request.Longitude);
         
         var result = await _mediator.Send(command);
         if (!result.Success)
