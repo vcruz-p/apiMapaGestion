@@ -39,7 +39,7 @@ public class PolygonsController : ControllerBase
         var command = new CreatePolygonCommand(
             request.Name,
             request.Description,
-            request.Coordinates); // Array of [lng, lat] pairs
+            new List<List<List<double>>> { request.Coordinates }); // Wrap in outer list
         
         var result = await _mediator.Send(command);
         if (!result.Success)
@@ -55,7 +55,7 @@ public class PolygonsController : ControllerBase
             id,
             request.Name,
             request.Description,
-            request.Coordinates);
+            request.Coordinates != null ? new List<List<List<double>>> { request.Coordinates } : null);
         
         var result = await _mediator.Send(command);
         if (!result.Success)

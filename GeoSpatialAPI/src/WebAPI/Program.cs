@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
 using StackExchange.Redis;
 using System.Reflection;
+using Domain.Interfaces;
+using Infrastructure.Services;
+using Infrastructure.Caching;
+using Infrastructure.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,9 +67,16 @@ builder.Services.AddDbContext<GeoDbContext>(options =>
 
 // Inyección de Dependencias (Clean Architecture)
 builder.Services.AddScoped<ICurrentContextService, CurrentContextService>();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Infrastructure.Services.Repository<>));
 builder.Services.AddScoped<IEventBus, RedisEventBus>();
 builder.Services.AddScoped<ICacheService, RedisCacheService>();
+
+// Repositorios especializados y UnitOfWork
+builder.Services.AddScoped<IMarkerRepository, MarkerRepository>();
+builder.Services.AddScoped<IPolygonRepository, PolygonRepository>();
+builder.Services.AddScoped<IRouteRepository, RouteRepository>();
+builder.Services.AddScoped<ITargetRepository, TargetRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Servicios de Dominio
 builder.Services.AddScoped<IMarkerService, MarkerService>();
