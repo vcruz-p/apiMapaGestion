@@ -83,19 +83,19 @@ public class PolygonService : IPolygonService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<Entities.Polygon>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Domain.Entities.Polygon>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _polygonRepository.GetAllAsync(cancellationToken);
     }
 
-    public async Task<Entities.Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Domain.Entities.Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _polygonRepository.GetByIdAsync(id, cancellationToken);
     }
 
-    public async Task<Entities.Polygon> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default)
+    public async Task<Domain.Entities.Polygon> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default)
     {
-        var polygon = new Entities.Polygon
+        var polygon = new Domain.Entities.Polygon
         {
             Id = Guid.NewGuid(),
             Name = name,
@@ -108,7 +108,7 @@ public class PolygonService : IPolygonService
         return polygon;
     }
 
-    public async Task<Entities.Polygon?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default)
+    public async Task<Domain.Entities.Polygon?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default)
     {
         var polygon = await _polygonRepository.GetByIdAsync(id, cancellationToken);
         if (polygon == null) return null;
