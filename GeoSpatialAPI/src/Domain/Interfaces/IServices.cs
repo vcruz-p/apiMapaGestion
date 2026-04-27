@@ -15,10 +15,10 @@ public interface IMarkerService
 
 public interface IPolygonService
 {
-    Task<IEnumerable<Polygon>> GetAllAsync(CancellationToken cancellationToken = default);
-    Task<Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-    Task<Polygon> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default);
-    Task<Polygon?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Entities.Polygon>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Entities.Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Entities.Polygon> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default);
+    Task<Entities.Polygon?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default);
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 }
 
