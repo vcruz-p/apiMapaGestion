@@ -10,22 +10,44 @@ using Infrastructure.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Cargar Variables de Entorno desde .env si existe
-var envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+// 1. Cargar Variables de Entorno desde .env si existe (antes de cualquier otra configuración)
+var envPath = Path.Combine(AppContext.BaseDirectory, ".env");
+if (!File.Exists(envPath))
+{
+    envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+}
+if (!File.Exists(envPath))
+{
+    envPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())?.FullName ?? "", ".env");
+}
+if (!File.Exists(envPath))
+{
+    envPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.FullName ?? "", ".env");
+}
+
+Console.WriteLine($"Buscando archivo .env en: {envPath}");
 if (File.Exists(envPath))
 {
+    Console.WriteLine($"Archivo .env encontrado: {envPath}");
     var lines = File.ReadAllLines(envPath);
     foreach (var line in lines)
     {
         if (!string.IsNullOrWhiteSpace(line) && !line.StartsWith("#") && line.Contains("="))
         {
-            var parts = line.Split('=', 2);
+            var parts = line.Split('=', 2, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length == 2)
             {
-                Environment.SetEnvironmentVariable(parts[0].Trim(), parts[1].Trim());
+                var key = parts[0].Trim();
+                var value = parts[1].Trim();
+                Environment.SetEnvironmentVariable(key, value);
+                Console.WriteLine($"  [{key}] = {value}");
             }
         }
     }
+}
+else
+{
+    Console.WriteLine("Advertencia: No se encontró archivo .env");
 }
 
 // 2. Leer Configuración
