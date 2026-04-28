@@ -1,5 +1,6 @@
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using NetTopologySuite;
 using StackExchange.Redis;
 using System.Reflection;
@@ -84,6 +85,10 @@ builder.Services.AddDbContext<GeoDbContext>(options =>
         o.UseNetTopologySuite(); // Habilita tipos geoespaciales
         o.MigrationsAssembly(typeof(GeoDbContext).Assembly.FullName);
     });
+    
+    // Suprimir advertencia de cambios pendientes en el modelo para permitir migración automática
+    options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
+    
     #if DEBUG
     options.EnableSensitiveDataLogging();
     options.EnableDetailedErrors();
