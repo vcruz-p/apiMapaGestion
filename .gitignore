@@ -1,4 +1,45 @@
-```
-# Environment variables
+# Build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.so
+*.dylib
+
+# Dependencies
+packages/
+node_modules/
+.nuget/
+.nuxt/
+
+# Logs
+*.log
+
+# Environment
 .env
-```
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+._*
+
+# Testing
+coverage/
+*.cover
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+[Tt]mp/
