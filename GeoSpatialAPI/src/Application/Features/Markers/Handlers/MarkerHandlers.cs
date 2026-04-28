@@ -180,7 +180,7 @@ public class UpdateMarkerHandler : IRequestHandler<UpdateMarkerCommand, Result<M
         if (marker == null)
             return Result<MarkerDto>.Fail("Marker not found");
 
-        marker.Name = request.Name;
+        marker.Name = request.Name ?? marker.Name;
         marker.Description = request.Description;
         marker.Geometry = new NetTopologySuite.Geometries.Point(request.Longitude, request.Latitude);
         marker.UpdatedAt = DateTime.UtcNow;
@@ -199,7 +199,7 @@ public class UpdateMarkerHandler : IRequestHandler<UpdateMarkerCommand, Result<M
             cancellationToken);
 
         var dto = new MarkerDto(
-            marker.Id, marker.Name, marker.Description,
+            marker.Id, marker.Name ?? string.Empty, marker.Description,
             marker.Geometry.Y, marker.Geometry.X,
             marker.CreatedAt, marker.UpdatedAt,
             marker.CreatedBy, marker.UpdatedBy, marker.OrganizationId);

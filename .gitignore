@@ -1,35 +1,47 @@
 ```
 # Build artifacts
+bin/
+obj/
 *.dll
 *.exe
 *.pdb
-*.config
-bin/
-obj/
-Debug/
-Release/
+*.so
+*.dylib
+*.jar
+*.war
+*.class
 
 # Dependencies
 packages/
 node_modules/
-vendor/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Logs
-*.log
+# IDE files
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # Environment
 .env
 .env.local
-*.env.*
+.env.*
+.local
 
-# Editors
-.vs/
-.vscode/
-.idea/
-*.userprefs
-*.user
+# Logs
+*.log
 
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Test and coverage
+coverage/
+htmlcov/
+.coverage
+*.cover
+coverage.xml
 ```

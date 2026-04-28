@@ -20,7 +20,7 @@ public class RedisEventBus : IEventBus
         try
         {
             var subscriber = _redis.GetSubscriber();
-            await subscriber.PublishAsync(channel, message);
+            await subscriber.PublishAsync(RedisChannel.Literal(channel), message);
             _logger.LogInformation("Published event to channel {Channel}: {Message}", channel, message);
         }
         catch (Exception ex)
@@ -34,7 +34,7 @@ public class RedisEventBus : IEventBus
         try
         {
             var subscriber = _redis.GetSubscriber();
-            await subscriber.SubscribeAsync(channel, async (ch, message) =>
+            await subscriber.SubscribeAsync(RedisChannel.Literal(channel), async (ch, message) =>
             {
                 try
                 {
