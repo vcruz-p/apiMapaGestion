@@ -1,40 +1,38 @@
 ```
 # Build artifacts
-bin/
-obj/
-*.dll
 *.exe
-*.pdb
+*.dll
 *.so
-*.dylib
-*.jar
-*.war
-*.class
+*.a
+*.obj
+*.out
+obj/
+bin/
+dist/
+build/
 
 # Dependencies
 packages/
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+vendor/
 
-# IDE files
-.vs/
-.vscode/
-.idea/
-*.swp
-*.swo
+# Logs
+*.log
+logs/
 
 # Environment
 .env
 .env.local
-.env.*
-.local
+*.env.*
 
-# Logs
-*.log
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
 
-# OS generated files
+# OS
 .DS_Store
 Thumbs.db
 
@@ -43,5 +41,21 @@ coverage/
 htmlcov/
 .coverage
 *.cover
-coverage.xml
+.nyc_output/
+
+# Compiled Python (if any Python files exist)
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
 ```
