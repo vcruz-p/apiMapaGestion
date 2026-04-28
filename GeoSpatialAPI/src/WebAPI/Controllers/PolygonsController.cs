@@ -42,10 +42,10 @@ public class PolygonsController : ControllerBase
             new List<List<List<double>>> { request.Coordinates }); // Wrap in outer list
         
         var result = await _mediator.Send(command);
-        if (!result.Success)
+        if (!result.Success || result.Data == null)
             return BadRequest(result);
         
-        return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result);
+        return CreatedAtAction(nameof(GetById), new { id = result.Data!.Id }, result);
     }
 
     [HttpPut("{id:guid}")]

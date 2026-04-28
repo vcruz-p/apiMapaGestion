@@ -65,10 +65,10 @@ public class MarkersController : ControllerBase
             request.Longitude);
         
         var result = await _mediator.Send(command);
-        if (!result.Success)
+        if (!result.Success || result.Data == null)
             return BadRequest(result);
         
-        return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result);
+        return CreatedAtAction(nameof(GetById), new { id = result.Data!.Id }, result);
     }
 
     /// <summary>
