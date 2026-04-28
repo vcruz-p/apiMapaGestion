@@ -41,6 +41,9 @@ var redisPort = Environment.GetEnvironmentVariable("REDIS_PORT") ?? "6379";
 var connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPass};Include Error Detail=true";
 
 // 3. Registrar Servicios
+// HttpContextAccessor (necesario para CurrentContextService)
+builder.Services.AddHttpContextAccessor();
+
 // Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
     ConnectionMultiplexer.Connect($"{redisHost}:{redisPort},abortConnect=false"));
