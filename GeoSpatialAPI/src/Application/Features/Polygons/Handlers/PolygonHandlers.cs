@@ -215,13 +215,17 @@ public class UpdatePolygonHandler : IRequestHandler<UpdatePolygonCommand, Result
         if (polygon == null)
             return Result<PolygonDto>.Fail("Polygon not found");
 
-        var coordinates = request.Coordinates.Select(ring => 
+        var coordinates = request.Coordinates?.Select(ring => 
             ring.Select(coord => new Coordinate(coord[0], coord[1])).ToArray()
         ).ToArray();
 
-        var linearRing = new LinearRing(coordinates[0]);
-        polygon.Geometry = new NetTopologySuite.Geometries.Polygon(linearRing);
-        polygon.Name = request.Name;
+        if (coordinates != null && coordinates.Length > 0)
+        {
+            var linearRing = new LinearRing(coordinates[0]);
+            polygon.Geometry = new NetTopologySuite.Geometries.Polygon(linearRing);
+        }
+        
+        polygon.Name = request.Name ?? polygon.Name;
         polygon.Description = request.Description;
         polygon.UpdatedAt = DateTime.UtcNow;
         polygon.UpdatedBy = _context.UserId;
@@ -235,9 +239,10 @@ public class UpdatePolygonHandler : IRequestHandler<UpdatePolygonCommand, Result
             System.Text.Json.JsonSerializer.Serialize(new { polygon.Id, polygon.OrganizationId }), 
             cancellationToken);
 
+        var coordsList = request.Coordinates ?? new List<List<List<double>>>();
         var dto = new PolygonDto(
-            polygon.Id, polygon.Name, polygon.Description,
-            request.Coordinates,
+            polygon.Id, polygon.Name ?? string.Empty, polygon.Description,
+            coordsList,
             polygon.CreatedAt, polygon.UpdatedAt,
             polygon.CreatedBy, polygon.UpdatedBy, polygon.OrganizationId);
 
