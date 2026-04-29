@@ -103,14 +103,14 @@ builder.Services.AddScoped<ICacheService, RedisCacheService>();
 
 // Repositorios especializados y UnitOfWork
 builder.Services.AddScoped<IMarkerRepository, MarkerRepository>();
-builder.Services.AddScoped<IPolygonRepository, PolygonRepository>();
+builder.Services.AddScoped<IAreaMapaRepository, AreaMapaRepository>();
 builder.Services.AddScoped<IRouteRepository, RouteRepository>();
 builder.Services.AddScoped<ITargetRepository, TargetRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Servicios de Dominio
 builder.Services.AddScoped<IMarkerService, MarkerService>();
-builder.Services.AddScoped<IPolygonService, PolygonService>();
+builder.Services.AddScoped<IAreaMapaService, AreaMapaService>();
 builder.Services.AddScoped<IRouteService, RouteService>();
 builder.Services.AddScoped<ITargetService, TargetService>();
 

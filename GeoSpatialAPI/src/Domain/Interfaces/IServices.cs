@@ -13,12 +13,12 @@ public interface IMarkerService
     Task<IEnumerable<Marker>> GetNearbyAsync(double latitude, double longitude, double radiusInMeters, CancellationToken cancellationToken = default);
 }
 
-public interface IPolygonService
+public interface IAreaMapaService
 {
-    Task<IEnumerable<Entities.Polygon>> GetAllAsync(CancellationToken cancellationToken = default);
-    Task<Entities.Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-    Task<Entities.Polygon> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default);
-    Task<Entities.Polygon?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default);
+    Task<IEnumerable<AreaMapa>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<AreaMapa?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<AreaMapa> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default);
+    Task<AreaMapa?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default);
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 }
 

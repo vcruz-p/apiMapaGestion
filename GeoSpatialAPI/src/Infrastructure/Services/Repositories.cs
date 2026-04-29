@@ -73,54 +73,54 @@ public class MarkerRepository : IMarkerRepository
     }
 }
 
-public class PolygonRepository : IPolygonRepository
+public class AreaMapaRepository : IAreaMapaRepository
 {
     private readonly GeoDbContext _context;
 
-    public PolygonRepository(GeoDbContext context)
+    public AreaMapaRepository(GeoDbContext context)
     {
         _context = context;
     }
 
-    public async Task<Domain.Entities.Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<AreaMapa?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Polygons.FindAsync(new object[] { id }, cancellationToken);
+        return await _context.AreaMapas.FindAsync(new object[] { id }, cancellationToken);
     }
 
-    public async Task<IEnumerable<Domain.Entities.Polygon>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<AreaMapa>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.Polygons.ToListAsync(cancellationToken);
+        return await _context.AreaMapas.ToListAsync(cancellationToken);
     }
 
-    public async Task<Domain.Entities.Polygon> AddAsync(Domain.Entities.Polygon entity, CancellationToken cancellationToken = default)
+    public async Task<AreaMapa> AddAsync(AreaMapa entity, CancellationToken cancellationToken = default)
     {
-        await _context.Polygons.AddAsync(entity, cancellationToken);
+        await _context.AreaMapas.AddAsync(entity, cancellationToken);
         return entity;
     }
 
-    public Task UpdateAsync(Domain.Entities.Polygon entity, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(AreaMapa entity, CancellationToken cancellationToken = default)
     {
-        _context.Polygons.Update(entity);
+        _context.AreaMapas.Update(entity);
         return Task.CompletedTask;
     }
 
-    public Task DeleteAsync(Domain.Entities.Polygon entity, CancellationToken cancellationToken = default)
+    public Task DeleteAsync(AreaMapa entity, CancellationToken cancellationToken = default)
     {
-        _context.Polygons.Remove(entity);
+        _context.AreaMapas.Remove(entity);
         return Task.CompletedTask;
     }
 
-    public async Task<IEnumerable<Domain.Entities.Polygon>> GetIntersectingAsync(Geometry geometry, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<AreaMapa>> GetIntersectingAsync(Geometry geometry, CancellationToken cancellationToken = default)
     {
         var wkt = geometry.AsText();
-        var polygons = await _context.Polygons
+        var areaMapas = await _context.AreaMapas
             .FromSqlRaw(
-                @"SELECT * FROM polygons 
+                @"SELECT * FROM areamapas 
                   WHERE ST_Intersects(geometry, ST_GeomFromText({0}, 4326))",
                 wkt)
             .ToListAsync(cancellationToken);
             
-        return polygons;
+        return areaMapas;
     }
 }
 
@@ -228,7 +228,7 @@ public class UnitOfWork : IUnitOfWork
     private bool _disposed;
 
     public IMarkerRepository Markers { get; }
-    public IPolygonRepository Polygons { get; }
+    public IAreaMapaRepository AreaMapas { get; }
     public IRouteRepository Routes { get; }
     public ITargetRepository Targets { get; }
 
@@ -236,7 +236,7 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
         Markers = new MarkerRepository(context);
-        Polygons = new PolygonRepository(context);
+        AreaMapas = new AreaMapaRepository(context);
         Routes = new RouteRepository(context);
         Targets = new TargetRepository(context);
     }
