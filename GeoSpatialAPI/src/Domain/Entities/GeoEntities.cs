@@ -13,7 +13,7 @@ public class Marker : BaseEntity
     }
 }
 
-public class Polygon : BaseEntity
+public class AreaMapa : BaseEntity
 {
     private NetTopologySuite.Geometries.Polygon? _geometry;
     
@@ -48,7 +48,7 @@ public class Target : BaseEntity
     // Dynamic JSON metadata
     public string? Metadata { get; set; }
     
-    // Reference to parent entity (Marker, Polygon, or Route)
+    // Reference to parent entity (Marker, AreaMapa, or Route)
     public Guid? ParentId { get; set; }
-    public string? ParentType { get; set; } // "Marker", "Polygon", "Route"
+    public string? ParentType { get; set; } // "Marker", "AreaMapa", "Route"
 }

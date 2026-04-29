@@ -35,9 +35,9 @@ public interface IMarkerRepository : IRepository<Domain.Entities.Marker>
     Task<IEnumerable<Domain.Entities.Marker>> GetIntersectingAsync(NetTopologySuite.Geometries.Geometry geometry, CancellationToken cancellationToken = default);
 }
 
-public interface IPolygonRepository : IRepository<Domain.Entities.Polygon>
+public interface IAreaMapaRepository : IRepository<AreaMapa>
 {
-    Task<IEnumerable<Domain.Entities.Polygon>> GetIntersectingAsync(NetTopologySuite.Geometries.Geometry geometry, CancellationToken cancellationToken = default);
+    Task<IEnumerable<AreaMapa>> GetIntersectingAsync(NetTopologySuite.Geometries.Geometry geometry, CancellationToken cancellationToken = default);
 }
 
 public interface IRouteRepository : IRepository<Domain.Entities.Route>
@@ -53,7 +53,7 @@ public interface ITargetRepository : IRepository<Domain.Entities.Target>
 public interface IUnitOfWork : IDisposable
 {
     IMarkerRepository Markers { get; }
-    IPolygonRepository Polygons { get; }
+    IAreaMapaRepository AreaMapas { get; }
     IRouteRepository Routes { get; }
     ITargetRepository Targets { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

@@ -9,7 +9,7 @@ public class GeoDbContext : DbContext
     private readonly ICurrentContextService _contextService;
 
     public DbSet<Marker> Markers => Set<Marker>();
-    public DbSet<Domain.Entities.Polygon> Polygons => Set<Domain.Entities.Polygon>();
+    public DbSet<AreaMapa> AreaMapas => Set<AreaMapa>();
     public DbSet<Route> Routes => Set<Route>();
     public DbSet<Target> Targets => Set<Target>();
 
@@ -31,7 +31,7 @@ public class GeoDbContext : DbContext
         
         // Global query filter for multi-tenancy (applied to all entities with OrganizationId)
         modelBuilder.Entity<Marker>().HasQueryFilter(e => e.OrganizationId == _contextService.OrganizationId);
-        modelBuilder.Entity<Polygon>().HasQueryFilter(e => e.OrganizationId == _contextService.OrganizationId);
+        modelBuilder.Entity<AreaMapa>().HasQueryFilter(e => e.OrganizationId == _contextService.OrganizationId);
         modelBuilder.Entity<Route>().HasQueryFilter(e => e.OrganizationId == _contextService.OrganizationId);
         modelBuilder.Entity<Target>().HasQueryFilter(e => e.OrganizationId == _contextService.OrganizationId);
     }

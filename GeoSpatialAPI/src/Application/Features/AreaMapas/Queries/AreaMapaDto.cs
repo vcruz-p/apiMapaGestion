@@ -1,6 +1,6 @@
-namespace Application.Features.Polygons.Queries;
+namespace Application.Features.AreaMapas.Queries;
 
-public record PolygonDto(
+public record AreaMapaDto(
     Guid Id,
     string Name,
     string? Description,

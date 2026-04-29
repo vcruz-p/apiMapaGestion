@@ -34,11 +34,11 @@ public class MarkerConfiguration : IEntityTypeConfiguration<Marker>
     }
 }
 
-public class PolygonConfiguration : IEntityTypeConfiguration<Domain.Entities.Polygon>
+public class AreaMapaConfiguration : IEntityTypeConfiguration<AreaMapa>
 {
-    public void Configure(EntityTypeBuilder<Domain.Entities.Polygon> builder)
+    public void Configure(EntityTypeBuilder<AreaMapa> builder)
     {
-        builder.ToTable("polygons");
+        builder.ToTable("areamapas");
         
         builder.HasKey(e => e.Id);
         
@@ -54,8 +54,8 @@ public class PolygonConfiguration : IEntityTypeConfiguration<Domain.Entities.Pol
         builder.Property(e => e.OrganizationId).HasColumnName("organization_id");
         builder.Property(e => e.IsDeleted).HasColumnName("is_deleted");
         
-        builder.HasIndex(e => e.OrganizationId).HasDatabaseName("ix_polygons_organization_id");
-        builder.HasIndex(e => e.IsDeleted).HasDatabaseName("ix_polygons_is_deleted");
+        builder.HasIndex(e => e.OrganizationId).HasDatabaseName("ix_areamapas_organization_id");
+        builder.HasIndex(e => e.IsDeleted).HasDatabaseName("ix_areamapas_is_deleted");
         
         builder.HasQueryFilter(e => !e.IsDeleted);
     }

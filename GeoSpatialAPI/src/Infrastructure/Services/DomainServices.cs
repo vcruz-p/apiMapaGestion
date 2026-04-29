@@ -72,30 +72,30 @@ public class MarkerService : IMarkerService
     }
 }
 
-public class PolygonService : IPolygonService
+public class AreaMapaService : IAreaMapaService
 {
-    private readonly IPolygonRepository _polygonRepository;
+    private readonly IAreaMapaRepository _areaMapaRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public PolygonService(IPolygonRepository polygonRepository, IUnitOfWork unitOfWork)
+    public AreaMapaService(IAreaMapaRepository areaMapaRepository, IUnitOfWork unitOfWork)
     {
-        _polygonRepository = polygonRepository;
+        _areaMapaRepository = areaMapaRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<Domain.Entities.Polygon>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<AreaMapa>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await _polygonRepository.GetAllAsync(cancellationToken);
+        return await _areaMapaRepository.GetAllAsync(cancellationToken);
     }
 
-    public async Task<Domain.Entities.Polygon?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<AreaMapa?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _polygonRepository.GetByIdAsync(id, cancellationToken);
+        return await _areaMapaRepository.GetByIdAsync(id, cancellationToken);
     }
 
-    public async Task<Domain.Entities.Polygon> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default)
+    public async Task<AreaMapa> CreateAsync(string name, string? description, List<List<List<double>>> coordinates, CancellationToken cancellationToken = default)
     {
-        var polygon = new Domain.Entities.Polygon
+        var areaMapa = new AreaMapa
         {
             Id = Guid.NewGuid(),
             Name = name,
@@ -103,31 +103,31 @@ public class PolygonService : IPolygonService
             Geometry = CreatePolygonFromCoordinates(coordinates)
         };
 
-        await _polygonRepository.AddAsync(polygon, cancellationToken);
+        await _areaMapaRepository.AddAsync(areaMapa, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return polygon;
+        return areaMapa;
     }
 
-    public async Task<Domain.Entities.Polygon?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default)
+    public async Task<AreaMapa?> UpdateAsync(Guid id, string? name, string? description, List<List<List<double>>>? coordinates, CancellationToken cancellationToken = default)
     {
-        var polygon = await _polygonRepository.GetByIdAsync(id, cancellationToken);
-        if (polygon == null) return null;
+        var areaMapa = await _areaMapaRepository.GetByIdAsync(id, cancellationToken);
+        if (areaMapa == null) return null;
 
-        if (name != null) polygon.Name = name;
-        if (description != null) polygon.Description = description;
-        if (coordinates != null) polygon.Geometry = CreatePolygonFromCoordinates(coordinates);
+        if (name != null) areaMapa.Name = name;
+        if (description != null) areaMapa.Description = description;
+        if (coordinates != null) areaMapa.Geometry = CreatePolygonFromCoordinates(coordinates);
 
-        await _polygonRepository.UpdateAsync(polygon, cancellationToken);
+        await _areaMapaRepository.UpdateAsync(areaMapa, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return polygon;
+        return areaMapa;
     }
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var polygon = await _polygonRepository.GetByIdAsync(id, cancellationToken);
-        if (polygon == null) return false;
+        var areaMapa = await _areaMapaRepository.GetByIdAsync(id, cancellationToken);
+        if (areaMapa == null) return false;
 
-        await _polygonRepository.DeleteAsync(polygon, cancellationToken);
+        await _areaMapaRepository.DeleteAsync(areaMapa, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
     }
