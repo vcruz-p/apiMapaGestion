@@ -1,5 +1,7 @@
 namespace Domain.Interfaces;
 
+using Domain.Entities;
+
 public interface ICurrentContextService
 {
     int UserId { get; }
